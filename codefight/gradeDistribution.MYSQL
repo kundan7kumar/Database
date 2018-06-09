@@ -1,0 +1,14 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE gradeDistribution()
+BEGIN
+	   SELECT g.name as Name, g.ID as ID
+    FROM (
+        SELECT name, ID, 
+        (Midterm1 * .25) + (Midterm2 * .25) + (Final * .50) as option1,
+        (Midterm1 * .50) + (Midterm2 * .50) as option2,
+        Final as option3
+        FROM Grades
+        ) g
+    WHERE g.option3 > g.option2 and g.option3 > g.option1
+    ORDER by LEFT(name,3) asc, ID ASC ;
+END
